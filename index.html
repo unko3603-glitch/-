@@ -60,8 +60,8 @@ input {
   margin-top: 15px;
 }
 
-/* 動画 */
-iframe {
+/* プレイヤー */
+#playerArea iframe {
   width: 100%;
   max-width: 900px;
   aspect-ratio: 16 / 9;
@@ -70,20 +70,32 @@ iframe {
   margin-bottom: 20px;
 }
 
-/* 動画一覧 */
-.video-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+/* 横スライド動画一覧 */
+.video-slider {
+  display: flex;
   gap: 12px;
+  overflow-x: auto;
+  padding: 10px;
   max-width: 900px;
   width: 100%;
 }
 
+.video-slider::-webkit-scrollbar {
+  height: 6px;
+}
+
+.video-slider::-webkit-scrollbar-thumb {
+  background: #4f6dff;
+  border-radius: 3px;
+}
+
 .video-item {
+  min-width: 140px;
   background: #1a1a25;
   border-radius: 8px;
-  padding: 10px;
+  padding: 12px 10px;
   cursor: pointer;
+  flex-shrink: 0;
   transition: 0.2s;
 }
 
@@ -122,27 +134,21 @@ iframe {
 <div id="videoScreen" class="center hidden">
   <h1>動画視聴</h1>
 
-  <iframe id="player"
-    src=""
-    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-    allowfullscreen>
-  </iframe>
+  <div id="playerArea"></div>
 
-  <div class="video-list" id="videoList"></div>
+  <div class="video-slider" id="videoList"></div>
 
   <button onclick="goHome()">戻る</button>
 </div>
 
 <script>
-/* =====================
-   設定ここだけ触ればOK
-===================== */
+/* ===== 設定（ここだけ触る）===== */
 
 const SITE_PASSWORD = "estoria";
 
 const VIDEO_LIST = [
   { title: "動画01", id: "hZUhb_ZGofU" },
-  { title: "動画02", id: "vrahuYM_vOzUegmt" },
+  { title: "動画02", id: "tgiNoEjI7IA" },
   { title: "動画03", id: "VIDEO_ID_03" },
   { title: "動画04", id: "VIDEO_ID_04" },
   { title: "動画05", id: "VIDEO_ID_05" },
@@ -150,12 +156,15 @@ const VIDEO_LIST = [
   { title: "動画07", id: "VIDEO_ID_07" },
   { title: "動画08", id: "VIDEO_ID_08" },
   { title: "動画09", id: "VIDEO_ID_09" },
-  { title: "動画10", id: "VIDEO_ID_10" }
+  { title: "動画10", id: "VIDEO_ID_10" },
+  { title: "動画11", id: "VIDEO_ID_11" },
+  { title: "動画12", id: "VIDEO_ID_12" },
+  { title: "動画13", id: "VIDEO_ID_13" },
+  { title: "動画14", id: "VIDEO_ID_14" },
+  { title: "動画15", id: "VIDEO_ID_15" }
 ];
 
-/* =====================
-   処理
-===================== */
+/* ===== 処理 ===== */
 
 function checkPassword() {
   if (passwordInput.value === SITE_PASSWORD) {
@@ -170,16 +179,23 @@ function showVideos() {
   homeScreen.classList.add("hidden");
   videoScreen.classList.remove("hidden");
   loadVideoList();
-  playVideo(VIDEO_LIST[0].id);
 }
 
 function goHome() {
   videoScreen.classList.add("hidden");
   homeScreen.classList.remove("hidden");
+  document.getElementById("playerArea").innerHTML = "";
 }
 
 function playVideo(id) {
-  player.src = "https://www.youtube.com/embed/" + id;
+  const area = document.getElementById("playerArea");
+  area.innerHTML = `
+    <iframe
+      src="https://www.youtube.com/embed/${id}"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+    </iframe>
+  `;
 }
 
 function loadVideoList() {
