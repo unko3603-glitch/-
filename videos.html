@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Episodes - エストリア連邦</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700&display=swap" rel="stylesheet">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <link rel="stylesheet" href="index.css">
+    <style>
+        .header {
+            padding: 4rem 0;
+            text-align: center;
+            animation: slideUp 0.8s ease-out;
+        }
+
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2.5rem;
+            padding-bottom: 5rem;
+        }
+
+        .video-card {
+            overflow: hidden;
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            animation: fadeInScale 0.8s ease-out backwards;
+        }
+
+        .video-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .video-thumbnail {
+            width: 100%;
+            aspect-ratio: 16/9;
+            background: #000;
+            position: relative;
+        }
+
+        .video-thumbnail iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .video-info {
+            padding: 1.5rem;
+        }
+
+        .video-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--accent-secondary);
+        }
+
+        .video-date {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        .nav-back {
+            position: fixed;
+            top: 2rem;
+            left: 2rem;
+            z-index: 100;
+        }
+
+        .btn-back {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 0.5rem 1rem;
+            border-radius: 10px;
+            color: white;
+            text-decoration: none;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: 0.3s;
+        }
+
+        .btn-back:hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        @media (max-width: 480px) {
+            .video-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="glow-bg"></div>
+
+    <nav class="nav-back">
+        <a href="index.html" class="btn-back">← TOPに戻る</a>
+    </nav>
+
+    <div class="container">
+        <header class="header">
+            <h1 class="title">Available Episodes</h1>
+            <p style="color: var(--text-muted);">エストリアの物語を、最新話からお届けします。</p>
+        </header>
+
+        <div class="glass"
+            style="margin-bottom: 2rem; padding: 1.5rem; border: 1px solid rgba(255, 100, 100, 0.3); background: rgba(255, 0, 0, 0.1); border-radius: 12px;">
+            <p style="font-size: 0.95rem; color: #ff8080; line-height: 1.6;">
+                ⚠️ <strong>動画が表示されない場合（Error 153）</strong><br>
+                PCのファイルを直接開いていると、YouTubeの制限で再生エラーになることがあります。<br>
+                その場合は、下の「<strong>YouTubeで視聴する</strong>」ボタンから直接ご覧ください。
+            </p>
+        </div>
+
+        <main class="video-grid" id="video-container">
+            <!-- Video Item 2 (Newest first) -->
+            <article class="video-card glass" style="animation-delay: 0.2s;">
+                <div class="video-thumbnail">
+                    <iframe
+                        src="https://www.youtube.com/embed/gyDkWqbOcS4?si=SNUqyFJ0puxsdAZL&rel=0&enablejsapi=1&widget_referrer=https://www.youtube.com"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                </div>
+                <div class="video-info">
+                    <h2 class="video-title">エストリア連邦 第2話</h2>
+                    <p class="video-date" style="margin-bottom: 1rem;">Latest Episode</p>
+                    <a href="https://youtu.be/gyDkWqbOcS4?si=SNUqyFJ0puxsdAZL" target="_blank" class="btn-primary"
+                        style="padding: 0.6rem 1.2rem; font-size: 0.9rem;">YouTubeで視聴する</a>
+                </div>
+            </article>
+
+            <!-- Video Item 1 -->
+            <article class="video-card glass" style="animation-delay: 0.4s;">
+                <div class="video-thumbnail">
+                    <iframe
+                        src="https://www.youtube.com/embed/tgiNoEjI7IA?si=MXB3kV6ddlSMg2Fc&rel=0&enablejsapi=1&widget_referrer=https://www.youtube.com"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                </div>
+                <div class="video-info">
+                    <h2 class="video-title">エストリア連邦 第1話</h2>
+                    <p class="video-date" style="margin-bottom: 1rem;">Series Premiere</p>
+                    <a href="https://youtu.be/tgiNoEjI7IA?si=MXB3kV6ddlSMg2Fc" target="_blank" class="btn-primary"
+                        style="padding: 0.6rem 1.2rem; font-size: 0.9rem;">YouTubeで視聴する</a>
+                </div>
+            </article>
+        </main>
+    </div>
+</body>
+
+</html>
